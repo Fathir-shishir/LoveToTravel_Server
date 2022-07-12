@@ -13,7 +13,7 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 app.use("/users", userRouter); 
 const MONGODB_URL =`mongodb+srv://loveToTravel:1122334466@cluster0.wqvbo.mongodb.net/Travel_DB?retryWrites=true&w=majority`
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 mongoose.connect(MONGODB_URL).then(()=>{
     app.listen(port,()=>{
