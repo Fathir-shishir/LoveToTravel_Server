@@ -1,4 +1,6 @@
 import TourModal from "../models/tour.js";
+import mongoose from "mongoose";
+
 
 
 export const createTour = async (req, res) => {
@@ -32,5 +34,13 @@ export const getTour = async (req, res) => {
     } catch (error) {
       res.status(404).json({ message: "Something went wrong" });
     }
+  };
+  export const getToursByUser = async (req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ message: "User doesn't exist" });
+    }
+    const userTours = await TourModal.find({ creator: id });
+    res.status(200).json(userTours);
   };
   
